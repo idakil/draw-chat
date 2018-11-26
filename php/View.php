@@ -2,9 +2,11 @@
 <html>
 <head>
     <title>Chat</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <h1>Chat</h1>
+
 <?php
 
 if (empty($this->messages)) {
