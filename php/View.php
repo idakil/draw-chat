@@ -5,6 +5,15 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<style>
+    body {
+        margin: 0;
+        padding 0;
+    }
+</style>
+<script>
+
+</script>
 <h1>Chat</h1>
 
 <?php
@@ -18,13 +27,22 @@ if (empty($this->messages)) {
 }
 ?>
 <h2>New message</h2>
-<form action="?action=send" method="POST">
-    <input type="text" name="message">
-    <input type="submit" value="Send">
-</form>
-<form action="?action=changeusername" method="POST">
-    <input type="text" name="username">
-    <input type="submit" value="changeusername">
-</form>
+<div id = "chat">
+    <form action="?action=send" method="POST">
+        <input type="text" name="message">
+        <input type="submit" value="Send">
+    </form>
+    <form action="?action=changeusername" method="POST">
+        <input type="text" name="username">
+        <input type="submit" value="changeusername">
+    </form>
+</div>
+
+<div id="draw">
+    <canvas>
+
+    </canvas>
+</div>
+
 </body>
 </html>
