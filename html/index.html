@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+<body>
+
+<script>
+
+</script>
+
+
+<div id="game">
+
+
+    <div id="draw">
+
+    </div>
+    <div id = "chat">
+        <form action="?action=send" method="POST">
+            <input type="text" name="message">
+            <input type="submit" value="Send">
+        </form>
+        <form action="?action=changeusername" method="POST">
+            <input type="text" name="username">
+            <input type="submit" value="changeusername">
+        </form>
+    </div>
+</div>
+<script src="../js/drawingBoard.js"></script>
+</body>
+</html>
