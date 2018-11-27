@@ -1,0 +1,25 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+}
+
+
+canvas {
+    border: 5px solid black;
+
+}
+
+
+#draw {
+
+    padding: 0;
+    margin: 0 auto;
+}
+
+#chat {
+
+}
+
+#game {
+
+}

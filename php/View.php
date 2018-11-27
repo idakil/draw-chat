@@ -3,6 +3,7 @@
 <head>
     <title>Chat</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="js/drawingBoard.js"></script>
 </head>
 <body>
 <style>
