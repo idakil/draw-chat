@@ -5,7 +5,7 @@ init();
 
 function init() {
     canvas = document.createElement('canvas');
-
+    canvas.setAttribute('id', 'canvas');
     console.log(canvas);
     canvas.width = winWidth;
     canvas.height = winHeight;
@@ -13,14 +13,13 @@ function init() {
     context = canvas.getContext( '2d' );
     context.strokeStyle = 'rgb(0,0,0)';
     context.lineWidth = 0.5;
-    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-    document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-    //document.body.appendChild( canvas );
+    canvas.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    canvas.addEventListener( 'mouseup', onDocumentMouseUp, false );
     document.getElementById('draw').appendChild(canvas);
 }
 function onDocumentMouseDown( event ) {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
+    mouse.x = event.pageX - canvas.offsetLeft;
+    mouse.y = event.pageY - canvas.offsetTop;
     document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 }
 function onDocumentMouseUp( event ) {
@@ -29,9 +28,9 @@ function onDocumentMouseUp( event ) {
 function onDocumentMouseMove( event ) {
     context.beginPath();
     context.moveTo( mouse.x, mouse.y );
-    context.lineTo( event.clientX, event.clientY );
+    context.lineTo(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
     context.stroke();
     console.log(context);
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
+    mouse.x = event.pageX - canvas.offsetLeft;
+    mouse.y = event.pageY - canvas.offsetTop;
 }
