@@ -22,9 +22,11 @@ function onDocumentMouseDown( event ) {
     mouse.y = event.pageY - canvas.offsetTop;
     document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 }
+
 function onDocumentMouseUp( event ) {
     document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
 }
+
 function onDocumentMouseMove( event ) {
     context.beginPath();
     context.moveTo( mouse.x, mouse.y );
@@ -33,4 +35,8 @@ function onDocumentMouseMove( event ) {
     console.log(context);
     mouse.x = event.pageX - canvas.offsetLeft;
     mouse.y = event.pageY - canvas.offsetTop;
+}
+
+function clearCanvas() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
 }
