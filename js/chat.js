@@ -35,7 +35,6 @@ function getStateOfChat(){
         });
     }
 }
-
 //Updates the chat
 function updateChat(){
     if(!instanse){

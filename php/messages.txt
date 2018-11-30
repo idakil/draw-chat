@@ -1,8 +1,6 @@
-<span>Guest</span>macintosh 
-<span>Guest</span>vittukun ei tied&auml; 
-<span>Guest</span>uusi viesti 
-<span>Guest: </span>ch&auml;tbooksi 
-<span>Guest: </span>5 kautta 5 
-<span>Jorma: </span>Kyll&auml;! 
-<span>Guest: </span>fetg5g 
-<span>Guest: </span>formalisoi muuttujat 
+<span>null: </span>wololo
+<span>Guest: </span>en
+<span>null: </span>paskana t&auml;m&auml;kin
+<span>Guest2: </span>nii o
+<span>Guest22: </span>vittu saatana
+<span>null: </span>olen null
