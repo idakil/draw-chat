@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $servername = "localhost";
 $username = "username";
@@ -32,6 +33,10 @@ if ($conn->query($sql) === TRUE) {
 $sql = "SELECT * FROM words ORDER BY RAND() LIMIT 1";
 $result = $conn->query($sql);
 
-    while($row = $result->fetch_assoc()) {
-        echo $row["word"]. "<br>";
-    }
+$a = $result->fetch_assoc()["word"];
+
+$_SESSION['word'] = $a;
+//echo $a;
+
+echo $_SERVER['REMOTE_ADDR'];
+$conn->close();

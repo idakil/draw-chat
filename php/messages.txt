@@ -16,3 +16,91 @@
 <span>Guest: </span>kafokfa 
 <span>Guest: </span>lalalllalalalalala 
 <span>Guest: </span>kakp&auml;&auml; 
+<span>Guest: </span>afkoakfa 
+<span>Guest: </span>aaaaa 
+<span>Guest: </span>palkkasosaklab 
+<span>Guest: </span>aaaaaaa 
+<span>Guest: </span>noTHING 
+<span>Guest: </span>aa 
+<span>Guest: </span>T&Auml;H 
+<span>Guest: </span>asdsa 
+<span>Guest: </span>aa 
+<span>Guest: </span>aas 
+<span>Guest: </span><a href="http://google.com" target="_blank">http://google.com</a> 
+<span>Guest: </span>aa 
+<span>Guest: </span>Pullo 
+<span>Guest: </span>a 
+<span>Guest: </span>Kalja 
+<span>Guest: </span>Pullo 
+<span>Guest: </span>Kissa 
+<span>Guest: </span>Koira 
+<span>Guest: </span>Pipo 
+<span>Guest: </span><?php  $servername = "localhost"; $username = "username"; $password = "password"; $database = "wordbase";   // Create connection $conn = new mysqli($servername, $username, $password, $database); // Check connection if ($conn->connect_error) {     die("Connection failed: " . $conn->connect_error); }   //$q = "CREATE DATABASE IF NOT EXISTS wordbase"; /* $sana = "a"; $kategoria = "b";  $sql = "INSERT INTO words (word, category) VALUES ($sana, $kategoria)";  if ($conn->query($sql) === TRUE) {     echo "New record created successfully"; } else {     echo "Error: " . $sql . "<br>" . $conn->error; } */   $sql = "SELECT * FROM words ORDER BY RAND() LIMIT 1"; $result = $conn->query($sql); echo $result->fetch_assoc()["word"]; 
+<span>Guest: </span>Kissa 
+<span>Guest: </span>Koira 
+<span>Guest: </span>Pullo 
+<span>Guest: </span>Kalja 
+<span>Guest: </span>Pipo 
+<span>Guest: </span>Kalja 
+<span>Guest: </span>Kissa 
+<span>Guest: </span>Kissa
+<span>Guest: </span>Kissa
+<span>Guest: </span>///Kalja///sdsdvs ///
+<span>Guest: </span>///Kalja///d ///
+<span>Guest: </span>///aa ///Koira///
+<span>Guest: </span>///ccc ///Kissa///
+<span>Guest: </span>/// ///Koira///
+<span>Guest: </span>///aaa///Pipo///
+<span>Guest: </span>Koira
+<span>Guest: </span>Kissa
+<span>Guest: </span>YOU HAVE GUESSED THE WORD
+<span>Guest: </span>aa
+<span>aa: </span>Kissa
+<span>aa: </span>Pullo
+<span>aa: </span>Koira
+<span>aa: </span>Pipo
+<span>aa: </span> HAS GUESSED THE WORD
+<span>a: </span>a HAS GUESSED THE WORD
+<span>a: </span>Koira
+<span>a: </span>Pullo
+<span>Guest: </span>a
+<span>Guest: </span>Koira
+<span>Guest: </span>Kissa
+<span>Guest: </span>Pullo
+<span>Guest: </span>Pipo
+<span>Guest: </span>Guest HAS GUESSED THE WORD
+<span>Guest: </span>Kissa
+<span>Guest: </span>Koira
+<span>Guest: </span>Kalja
+<span>Guest: </span>Guest HAS GUESSED THE WORD
+<span>Guest: </span>Pipo
+<span>Guest: </span>Koira
+<span>Guest: </span>Kissa
+<span>Guest: </span>Kalja
+<span>Guest: </span>Guest HAS GUESSED THE WORD
+Guest HAS GUESSED THE WORD
+<span>Guest: </span>Koira
+<span>Guest: </span>Kissa
+<span>Guest: </span>Koira
+Guest HAS GUESSED THE WORD
+<span>jorma: </span>ohhoh
+<span>jorma: </span>&auml;&auml;hhh
+<span>jorma: </span>Kissa
+<span>jorma: </span>Koira
+<span>jorma: </span>Kalja
+<span>jorma: </span>Pipo
+jorma HAS GUESSED THE WORD
+<span>Guest: </span>koira
+<span>Guest: </span>kissa
+Guest HAS GUESSED THE WORD
+<span>Guest: </span>pipo
+<span>Guest: </span>AAa
+<span>Guest: </span>koira
+<span>Guest: </span>kakak
+<span>Guest: </span>pissa
+Guest HAS GUESSED THE WORD
+Guest HAS GUESSED THE WORD
+<span>aa: </span>ss
+<span>Guest: </span>a
+<span>Guest: </span>aaaaa
+<span>aa: </span>aaaaaaa

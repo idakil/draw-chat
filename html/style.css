@@ -8,7 +8,9 @@ canvas {
     border: 4px solid green;
 
 }
-
+span {
+    font-weight: bold;
+}
 
 #draw {
     width: 800px;
