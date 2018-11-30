@@ -32,7 +32,6 @@ switch($function) {
             }
             $log['text'] = $text;
         }
-
         break;
 
     case('send'):
