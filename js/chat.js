@@ -1,8 +1,4 @@
-/* 
-Created by: Kenrick Beckett
 
-Name: Chat Engine
-*/
 
 var instanse = false;
 var state;
@@ -35,7 +31,6 @@ function getStateOfChat(){
         });
     }
 }
-
 //Updates the chat
 function updateChat(){
     if(!instanse){

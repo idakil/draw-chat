@@ -7,7 +7,6 @@
     <script src="../js/chat.js"></script>
     <script src="../js/bb.js"></script>
 
-
     <title>Title</title>
 </head>
 <script>
@@ -44,10 +43,6 @@
                 var maxLength = $(this).attr("maxlength");
                 var length = this.value.length;
 
-                // don't allow new content if length is maxed out
-                if (length >= maxLength) {
-                    event.preventDefault();
-                }
             }
         });
         // watch textarea for release of key press
@@ -69,7 +64,9 @@
             }
         });
     });
+
 </script>
+
 <body onload="setInterval('chat.update()', 100)">
 
 <p id="name-area"></p>
@@ -77,6 +74,7 @@
 
 
     <div id="draw"></div>
+    <canvas id="blank" style='display:none'> </canvas>
     <div id= "counter"></div>
 
     <div id = "chat-wrap">
