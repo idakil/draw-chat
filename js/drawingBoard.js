@@ -1,15 +1,15 @@
 
-var canvas, context, mouse = { x: 0, y: 0 };
-var prevX, prevY;
+var canvas, context;
+
 let winWidth = 800;
 let winHeight = 600;
-var source;
 var conn;
+let mouse = {prevX:0, prevY: 0, x: 0, y: 0 };
 init();
 
 function init() {
 
-    conn = new WebSocket('ws://localhost:8080');
+    conn = new WebSocket('ws://localhost:3000');
     conn.onopen = function(e) {
         console.log("Connection established!");
 
@@ -28,16 +28,21 @@ function init() {
     document.getElementById('draw').appendChild(canvas);
 
     conn.onmessage = function(e) {
-        console.log(e.data);
+        //console.log(e.data);
         var a = JSON.parse(e.data);
-        console.log("X: " + a.x);
-        console.log("Y: " + a.y);
-        updateCanvas(a.x, a.y);
+
+        updateCanvas(a.prevX, a.prevY, a.x, a.y);
     };
 }
 function onDocumentMouseDown( event ) {
+
+    //console.log(prevX + " " + prevY);
     mouse.x = event.pageX - canvas.offsetLeft;
     mouse.y = event.pageY - canvas.offsetTop;
+    mouse.prevX = mouse.x;
+    mouse.prevY = mouse.y;
+    //console.log(prevX + " " + prevY + "after" + mouse.x + " " + mouse.y);
+
     document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 }
 
@@ -55,6 +60,8 @@ function onDocumentMouseMove( event ) {
     mouse.y = event.pageY - canvas.offsetTop;
 
    conn.send(JSON.stringify(mouse));
+   mouse.prevX = mouse.x;
+   mouse.prevY = mouse.y;
 
 
     /*var url = "../php/draw.php?x="+mouse.x+"&y="+mouse.y;
@@ -68,14 +75,15 @@ function onDocumentMouseMove( event ) {
     };
     httpc.send();*/
 }
-function updateCanvas(x, y){
+function updateCanvas(prevX, prevY, x, y){
 
     context.beginPath();
     context.moveTo(prevX, prevY);
-    context.lineTo(x - canvas.offsetLeft,y - canvas.offsetTop);
+    context.lineTo(x, y);
     context.stroke();
-    prevX = x - canvas.offsetLeft;
-    prevY = y - canvas.offsetTop;
+    //console.log(prevX + " " + prevY + "update");
+    /*prevX = x - canvas.offsetLeft;
+    prevY = y - canvas.offsetTop;*/
     /* source.onmessage = function(event) {
          document.getElementById("counter").innerHTML = event.data + "<br>";
          console.log(event.data);
