@@ -36,7 +36,7 @@ $result = $conn->query($sql);
 $a = $result->fetch_assoc()["word"];
 
 $_SESSION['word'] = $a;
-//echo $a;
+echo $a;
 
-echo $_SERVER['REMOTE_ADDR'];
+//echo $_SERVER['REMOTE_ADDR'];
 $conn->close();

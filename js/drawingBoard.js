@@ -3,17 +3,17 @@ var canvas, context, mouse = { x: 0, y: 0 };
 var prevX, prevY;
 let winWidth = 800;
 let winHeight = 600;
-var source;
-var conn;
+let conn;
 init();
 
 function init() {
 
-    conn = new WebSocket('ws://localhost:8080');
+    console.log("initt");
+    conn = new WebSocket('ws://localhost:3000');
     conn.onopen = function(e) {
         console.log("Connection established!");
-
     };
+
     canvas = document.createElement('canvas');
     canvas.setAttribute('id', 'canvas');
     console.log(canvas);
