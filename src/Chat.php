@@ -6,16 +6,21 @@ use Ratchet\ConnectionInterface;
 
 class Chat implements MessageComponentInterface {
     protected $clients;
+    private $users;
 
    public function __construct() {
         $this->clients = new \SplObjectStorage;
+        $this->users = [];
     }
 
     public function onOpen(ConnectionInterface $conn) {
         // Store the new connection to send messages to later
         $this->clients->attach($conn);
+        $this->users[$conn->resourceId] = $conn;
 
         echo "New connection! ({$conn->resourceId})\n";
+
+
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {

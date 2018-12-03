@@ -6,11 +6,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/chat.js"></script>
     <script src="../js/bb.js"></script>
-
     <title>Title</title>
 </head>
 <script>
-
     // ask user for name with popup prompt
     var name = prompt("Enter your chat name:", "Guest");
 
@@ -31,7 +29,7 @@
     $(function() {
 
         chat.getState();
-
+/*
         // watch textarea for key presses
         $('#sendbox').keydown(function(event) {
 
@@ -44,11 +42,11 @@
                 var length = this.value.length;
 
             }
-        });
+        });*/
         // watch textarea for release of key press
         $('#sendbox').keyup(function(e) {
 
-            if (e.which === 13) {
+            if (e.which === 13 ) {
 
                 var text = $(this).val();
                 var maxLength = $(this).attr("maxlength");
@@ -72,24 +70,37 @@
 <p id="name-area"></p>
 <div id="game">
 
-
     <div id="draw"></div>
-    <canvas id="blank" style='display:none'> </canvas>
-    <div id= "counter"></div>
 
+    <div id= "counter"></div>
+    <div id="word"></div>
     <div id = "chat-wrap">
         <div id ="chat-area">
         </div>
         <div id="forms">
             <form id="send-message-area">
                 <textarea name="message" id="sendbox" maxlength = '100'></textarea>
+                <button id="send">Send</button>
             </form>
-            <!--<form id="send-message-area1">
-                <p>Your message: </p>
-                <textarea id="sendbox1" maxlength = '100' ></textarea>
-            </form>-->
         </div>
     </div>
+
+    <div id="options">
+        <div id="buttonBox">
+            <button id="red"></button>
+            <button id="yellow"></button>
+            <button id="green"></button>
+            <button id="blue"></button>
+            <button id="purple"></button>
+            <button id="pink"></button>
+            <button id="black"></button>
+            <button id="eraser"></button>
+        </div>
+        <div id="slidecontainer">
+            <input type="range" min="1" max="20" value="2" class="slider" id="strokeRange">
+        </div>
+    </div>
+
 </div>
 <script src="../js/drawingBoard.js"></script>
 </body>

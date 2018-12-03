@@ -1,4 +1,5 @@
 <?php
+session_start();
 $function = $_POST['function'];
 
 $log = array();
