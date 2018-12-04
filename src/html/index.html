@@ -5,12 +5,11 @@
     <link rel="stylesheet" href="style.css" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/chat.js"></script>
-    <script src="../js/bb.js"></script>
     <title>Title</title>
 </head>
 <script>
-    // ask user for name with popup prompt
-    var name = prompt("Enter your chat name:", "Guest");
+    // ask user for name
+    let name = prompt("Enter your chat name:", "Guest");
 
     // default name is 'Guest'
     if (!name || name === ' ') {
@@ -20,10 +19,7 @@
     // strip tags
     name = name.replace(/(<([^>]+)>)/ig,"");
 
-    // display name on page
-    $("#name-area").html("You are: <span>" + name + "</span>");
-
-    // kick off chat
+    //kick off chat
     var chat =  new Chat();
 
     $(function() {
@@ -40,7 +36,6 @@
 
                 var maxLength = $(this).attr("maxlength");
                 var length = this.value.length;
-
             }
         });*/
         // watch textarea for release of key press
@@ -65,15 +60,11 @@
 
 </script>
 
-<body onload="setInterval('chat.update()', 100)">
+<body onload="setInterval('chat.update()', 1000)">
 
-<p id="name-area"></p>
 <div id="game">
 
     <div id="draw"></div>
-
-    <div id= "counter"></div>
-    <div id="word"></div>
     <div id = "chat-wrap">
         <div id ="chat-area">
         </div>
@@ -95,12 +86,14 @@
             <button id="pink"></button>
             <button id="black"></button>
             <button id="eraser"></button>
+            <button id="save" onclick="saveImage()">Save Image</button>
+            <button id="load" onclick="loadImage()">Load Image</button>
         </div>
+        <button id="clear" onclick="clearCanvas()">Clear board</button>
         <div id="slidecontainer">
             <input type="range" min="1" max="20" value="2" class="slider" id="strokeRange">
         </div>
     </div>
-
 </div>
 <script src="../js/drawingBoard.js"></script>
 </body>

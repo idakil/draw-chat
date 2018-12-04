@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="wordbase@localhost">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.11">
+  <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.14">
     <root id="1">
-      <ServerVersion>5.5.5</ServerVersion>
-      <RdbmsFlavour>MariaDB</RdbmsFlavour>
+      <ServerVersion>10.3.9</ServerVersion>
+      <Dbms>MARIADB</Dbms>
       <DefaultEngine>InnoDB</DefaultEngine>
-      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
       <DefaultCasing>lower/lower</DefaultCasing>
     </root>
     <schema id="2" parent="1" name="autokanta">
@@ -1327,19 +1326,12 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="333" parent="331" name="word">
+    <column id="333" parent="331" name="image">
       <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>blob|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="334" parent="331" name="category">
-      <Position>3</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="335" parent="331" name="PRIMARY">
+    <key id="334" parent="331" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

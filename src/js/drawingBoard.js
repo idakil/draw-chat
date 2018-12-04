@@ -1,24 +1,21 @@
 
-var canvas, context;
-
+let canvas, context;
 let winWidth = 800;
 let winHeight = 600;
-var conn;
+let conn;
 let col = "rgb(0,0,0)";
 let size = 2;
 let mouse = {prevX:0, prevY: 0, x: 0, y: 0, color: col, strokeSize: size};
+
 init();
 
 function init() {
-
     conn = new WebSocket('ws://localhost:3000');
-    conn.onopen = function(e) {
+    conn.onopen = function() {
         console.log("Connection established!");
-
     };
     canvas = document.createElement('canvas');
     canvas.setAttribute('id', 'canvas');
-    console.log(canvas);
     canvas.width = winWidth;
     canvas.height = winHeight;
     canvas.style.cursor = 'crosshair';
@@ -30,37 +27,28 @@ function init() {
     document.getElementById('draw').appendChild(canvas);
 
     conn.onmessage = function(e) {
-        //console.log(e.data);
-        var a = JSON.parse(e.data);
-
+        let a = JSON.parse(e.data);
         updateCanvas(a.prevX, a.prevY, a.x, a.y, a.color, a.strokeSize);
-
         if (a.empty === 1) {
+
             context.clearRect(0, 0, canvas.width, canvas.height);
         }
-       // document.getElementById('counter').innerHTML = a.time;
     };
-
-
 }
-function onDocumentMouseDown( event ) {
 
-    //console.log(prevX + " " + prevY);
+function onDocumentMouseDown( event ) {
     mouse.x = event.pageX - canvas.offsetLeft;
     mouse.y = event.pageY - canvas.offsetTop;
     mouse.prevX = mouse.x;
     mouse.prevY = mouse.y;
-    //console.log(prevX + " " + prevY + "after" + mouse.x + " " + mouse.y);
-
     document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 }
 
-function onDocumentMouseUp( event ) {
+function onDocumentMouseUp() {
     document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
 }
 
 function onDocumentMouseMove( event ) {
-   //var httpc = new XMLHttpRequest();
     context.beginPath();
     context.moveTo( mouse.x, mouse.y );
     context.lineTo(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
@@ -71,18 +59,6 @@ function onDocumentMouseMove( event ) {
    conn.send(JSON.stringify(mouse));
    mouse.prevX = mouse.x;
    mouse.prevY = mouse.y;
-
-
-    /*var url = "../php/draw.php?x="+mouse.x+"&y="+mouse.y;
-    httpc.open("GET", url, true); // sending
-
-
-    httpc.onreadystatechange = function() { //Call a function when the state changes.
-        if(httpc.readyState === 4 && httpc.status === 200) {
-            updateCanvas();
-        }
-    };
-    httpc.send();*/
 }
 function updateCanvas(prevX, prevY, x, y, col, size){
     context.strokeStyle = col;
@@ -91,63 +67,6 @@ function updateCanvas(prevX, prevY, x, y, col, size){
     context.moveTo(prevX, prevY);
     context.lineTo(x, y);
     context.stroke();
-    //console.log(prevX + " " + prevY + "update");
-    /*prevX = x - canvas.offsetLeft;
-    prevY = y - canvas.offsetTop;*/
-    /* source.onmessage = function(event) {
-         document.getElementById("counter").innerHTML = event.data + "<br>";
-         console.log(event.data);
-     };
-
-   /*
-     var sendinfo = {
-         x: mouse.x,
-         y: mouse.y
-     };
-     $.ajax({
-         type: "POST",
-         url: "../php/draw.php",
-         dataType: JSON,
-         data: sendinfo,
-         success: function (data) {
-             var parsettu = JSON.parse(data);
-             context.beginPath();
-             context.moveTo( mouse.x, mouse.y );
-             context.lineTo(parsettu.x, parsettu.y);
-         }
-     })
-     //var url = "../php/draw.php?x="+mouse.x+"&y="+mouse.y;
-     //httpc.open("GET", url, true); // sending
-
-
-    httpc.onreadystatechange = function() { //Call a function when the state changes.
-         if(httpc.readyState == 4 && httpc.status == 200) { // complete and no errors
-             console.log(httpc.responseText);
-             var a = JSON.parse(httpc.responseText);
-             context.beginPath();
-             console.log('mousex' + mouse.x + " y " + mouse.y);
-             context.moveTo( mouse.x, mouse.y );
-             context.lineTo(a.x - canvas.offsetLeft, a.y - canvas.offsetTop);
-             context.stroke();
-             mouse.x = a.pageX - canvas.offsetLeft;
-             mouse.y = a.pageY - canvas.offsetTop;
-         }
-     };
-     var url = "../php/draw.php?x="+mouse.x+"&y="+mouse.y;
-     httpc.open("GET", url, true); // sending
-     httpc.send();*/
-}
-
-function clearCanvas() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-function updateTimer() {
-    seconds = new Date().getSeconds();
-    // var seconds = (new Date().getTime() / 1000) ;
-    var last2 = { time: Math.round(seconds).toString().slice(-2)};
-
-    conn.send(JSON.stringify(last2));
 }
 
 document.getElementById("red").addEventListener('click', function(){
@@ -156,7 +75,6 @@ document.getElementById("red").addEventListener('click', function(){
 document.getElementById("black").addEventListener('click', function(){
     changeColor(this);
 });
-
 document.getElementById("green").addEventListener('click', function(){
     changeColor(this);
 });
@@ -224,7 +142,7 @@ switch (c) {
 }
 }
 
-var slider = document.getElementById("strokeRange");
+let slider = document.getElementById("strokeRange");
 
 slider.oninput = function(){
     context.lineWidth = slider.value;
@@ -232,8 +150,59 @@ slider.oninput = function(){
 };
 
 function clearCanvas() {
-    var o = {empty: 1};
+    let o = {empty: 1};
     conn.send(JSON.stringify(o));
     context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function saveImage() {
+    //let imageName = document.getElementById("name").value;
+    //console.log(imageName);
+    let hr = new XMLHttpRequest();
+    let url = "../php/db.php";
+    let data = "dataurl="+canvas.toDataURL("image/png");
+    //let data2 = {dataurl:(canvas.toDataURL("image/png"))};
+    //data = encodeURI(data);
+    hr.open("POST", url);
+
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    hr.onreadystatechange = function() {
+        if(hr.readyState === 4 && hr.status === 200) {
+            console.log("sent");
+
+        }
+    };
+    hr.send(data);
+    clearCanvas();
+}
+
+function loadImage() {
+
+    let hr = new XMLHttpRequest();
+    let url = "../php/fromDB.php";
+
+    let ok = "ok=ok";
+
+    hr.addEventListener("error", function (event) {
+        event.preventDefault();
+        console.log("error");
+    });
+
+    hr.open("POST", url);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    hr.onreadystatechange = function () {
+        if (hr.readyState === 4 && hr.status === 200) {
+            clearCanvas();
+            let dataur = hr.responseText.replace(/\s/g, "+");
+            let img = new Image;
+            img.onload = function () {
+                context.drawImage(img, 0, 0);
+            };
+            img.src = dataur;
+        }
+    };
+
+    hr.send(ok);
 }
 

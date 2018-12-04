@@ -1,9 +1,9 @@
 
 
-var instanse = false;
-var state;
-var mes;
-var file;
+let instanse = false;
+let state;
+let mes;
+let file;
 
 function Chat () {
     this.update = updateChat;

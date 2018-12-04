@@ -38,6 +38,7 @@ span {
     padding: 0 10px;
     position: absolute;
     bottom: 5px;
+    height: 36px;
 }
 textarea {
     resize: none;
@@ -45,9 +46,10 @@ textarea {
     height: 100%;
 }
 #send-message-area{
-
 }
-
+#send{
+    height: 100%;
+}
 #options {
     width: 800px;
     margin: 0;
