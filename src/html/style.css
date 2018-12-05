@@ -7,26 +7,13 @@ body {
     font-family: 'Comic Sans MS', sans-serif;
 }
 
-#clear {
-    margin-right: 10px;
-    border-width: medium;
-    float: right;
-    background-color: white;
-    font-weight: bold;
-    padding-top: 4px;
-    padding-bottom: 4px;
-}
-
 canvas {
     border: 2px solid #3071a9;
     box-shadow: 2px 2px 1px #000000, 0px 0px 1px #0d0d0d;
     border-radius: 20px;
     background-color: white;
+}
 
-}
-span {
-    font-weight: bold;
-}
 
 #draw {
     width: 800px;
@@ -48,7 +35,6 @@ span {
     padding: 0 10px;
     position: absolute;
     bottom: 5px;
-    height: 36px;
 }
 
 textarea {
@@ -58,15 +44,67 @@ textarea {
     height: 100%;
     margin: 10px;
     border-width: medium;
+}
 
-}
-#send-message-area{
-}
 #send{
     height: 100%;
 }
+
+#chat-wrap {
+    margin-left: 830px;
+    height: 600px;
+    background-color: white;
+    position: relative;
+    border: 2px solid #3071a9;
+    box-shadow: 2px 2px 1px #000000, 0px 0px 1px #0d0d0d;
+    overflow: hidden;
+    border-radius: 20px;
+}
+#chat-area {
+    height: 83%;
+    overflow: auto;
+    overflow-x: hidden;
+    padding-top: 32px;
+    padding-left: 1px;
+    margin-top: -1px;
+    border-top: 2px solid #3071a9;
+}
+
+#message-area{
+    margin-top: 20px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+#pinned {
+    font-weight: bold;
+    font-size: 150%;
+    margin: 0;
+    text-align: center;
+    position:absolute;
+    padding: 7px 0;
+    background-color: #ffbb38;
+    width:368px;
+    border-bottom: 2px solid #3071a9;
+}
+.time{
+    float: right;
+    font-size: 80%;
+    padding-right: 12px;
+    color: #d3d3d3;
+}
+.user{
+    font-weight: bold;
+}
+.msg {
+    margin: 0;
+    padding: 7px 0;
+    padding-left: 10px;
+    background-color: white;
+    width:365px;
+    border-bottom: 2px solid #3071a9;
+}
 #options {
-    width: 800px;
+    width: 100%;
     margin: 0;
     margin-top: 10px;
     height: 50px;
@@ -85,63 +123,9 @@ textarea {
     height: 30px;
 
 }
-#chat-wrap {
-    margin-left: 830px;
-    height: 600px;
-    background-color: white;
-    position: relative;
-
-    border: 2px solid #3071a9;
-    box-shadow: 2px 2px 1px #000000, 0px 0px 1px #0d0d0d;
-    overflow: hidden;
-    border-radius: 20px;
-
-}
-#chat-area {
-    height: 83%;
-    overflow: auto;
-    overflow-x: hidden;
-    padding-top: 32px;
-    padding-left: 1px;
-    margin-top: -1px;
-    border-top: 2px solid #3071a9;
-}
-
-
-#pinned {
-    margin: 0;
-    text-align: center;
-    position:absolute;
-    padding: 7px 0;
-    background-color: white;
-    width:365px;
-
-    border-bottom: 2px solid #3071a9;
-}
-#send {
-    float: right;
-    text-align: center;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-top: 10px;
-    margin-right: 25px;
-    font-weight: bold;
-    background-color: #3071a9;
-}
-#chat-area p {
-    margin: 0;
-    padding: 7px 0;
-    padding-left: 10px;
-    background-color: white;
-    width:365px;
-
-    border-bottom: 2px solid #3071a9;
-
-}
 .slider {
     background: transparent;
+    width: 200px;
 }
 #strokeRange::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
@@ -172,11 +156,21 @@ textarea {
     border-radius: 2px;
     cursor: pointer; /* Cursor on hover */
 }
+#bigdot{
+    float: right;
+    padding-top: 5px;
+    padding-right: 23px;
+}
+#smalldot{
+    float: left;
+    padding-top: 3px;
+    padding-left: 25px;
+}
 
 #buttonBox{
     margin: 0;
     float: left;
-    width: 400px;
+    width: 350px;
     height: 50px;
 }
 #red{
@@ -211,4 +205,34 @@ button{
     border: 1px solid black;
     cursor: pointer;
     outline: inherit;
+}
+#send {
+    float: right;
+    text-align: center;
+    padding: 10px 15px;
+    margin-top: 10px;
+    margin-right: 25px;
+    font-weight: bold;
+    background-color: #3071a9;
+}
+
+.button {
+    float: right;
+    text-align: center;
+    padding: 10px 15px;
+    margin-right: 10px;
+
+    font-weight: bold;
+    background-color: #3071a9;
+
+}
+#clear {
+    float: right;
+    text-align: center;
+    padding: 10px 15px;
+    margin-right: 173px;
+    margin-left: 30px;
+    font-weight: bold;
+    background-color: #3071a9;
+
 }

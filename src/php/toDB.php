@@ -1,11 +1,11 @@
 <?php
 
-
 if(isset($_POST['dataurl'])) {
     $image = $_POST['dataurl'];
     toDB($image);
 }
 
+//Lisätään saatu DataURL tietokantaan
 function toDB($image2){
     $servername = "localhost";
     $username = "username";
@@ -22,10 +22,9 @@ function toDB($image2){
 
     $sql = $conn->prepare("INSERT INTO words (image) VALUES (?)");
     $null = NULL;
-    $sql->bind_param("b", $null);
+    $sql->bind_param("b", $image2);
     $sql->send_long_data(0, $image2);
     $sql->execute();
-
     $conn->close();
 }
 

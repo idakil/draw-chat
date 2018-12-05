@@ -1328,7 +1328,7 @@
     </column>
     <column id="333" parent="331" name="image">
       <Position>2</Position>
-      <DataType>blob|0s</DataType>
+      <DataType>mediumtext|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <key id="334" parent="331" name="PRIMARY">

@@ -4,13 +4,21 @@ namespace MyApp;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
+
+/**
+ * Class Draw
+ * Tämä luokka lähettää ja vastaanottaa
+ * Ratchet-kirjaston rajapintaa hyödyntäen
+ * piirtämiseen ja chat-viestien lähettämiseen
+ * tarvittavaa dataa.
+ * Luokka ei itse tiedä datasta mitään, vaan sen
+ * käsittely hoidetaan client-puolella JavaScriptissä.
+ */
 class Draw implements MessageComponentInterface {
     protected $clients;
-    private $users;
 
    public function __construct() {
         $this->clients = new \SplObjectStorage;
-        $this->users = [];
     }
 
     public function onOpen(ConnectionInterface $conn) {
@@ -21,7 +29,6 @@ class Draw implements MessageComponentInterface {
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-
         foreach ($this->clients as $client) {
             if ($from !== $client) {
                 // The sender is not the receiver, send to each client connected

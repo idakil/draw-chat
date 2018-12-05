@@ -5,15 +5,19 @@ let winHeight = 600;
 let conn;
 let col = "rgb(0,0,0)";
 let size = 2;
+
+
 let mouse = {prevX:0, prevY: 0, x: 0, y: 0, color: col, strokeSize: size};
 
 init();
 
 function init() {
+    // Luodaan WebSocket
     conn = new WebSocket('ws://localhost:3000');
     conn.onopen = function() {
         console.log("Connection established!");
     };
+    // Luodaan piirtoalusta
     canvas = document.createElement('canvas');
     canvas.setAttribute('id', 'canvas');
     canvas.width = winWidth;
@@ -26,12 +30,15 @@ function init() {
     canvas.addEventListener( 'mouseup', onDocumentMouseUp, false );
     document.getElementById('draw').appendChild(canvas);
 
+    // Tarkistaa onko saapuva viesti a.prevX olemassa,
+    // jos ei niin viesti tarkoitettu chatille.
     conn.onmessage = function(e) {
         let a = JSON.parse(e.data);
-        updateCanvas(a.prevX, a.prevY, a.x, a.y, a.color, a.strokeSize);
-        if (a.empty === 1) {
-
-            context.clearRect(0, 0, canvas.width, canvas.height);
+        if(a.prevX){
+            updateCanvas(a.prevX, a.prevY, a.x, a.y, a.color, a.strokeSize);
+            if (a.empty === 1) {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            }
         }
     };
 }
@@ -48,6 +55,8 @@ function onDocumentMouseUp() {
     document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
 }
 
+// Piirretään koordinaateista saatu viiva ja lähetetään
+// hiiren tiedot websocketilla muille clienteille.
 function onDocumentMouseMove( event ) {
     context.beginPath();
     context.moveTo( mouse.x, mouse.y );
@@ -60,6 +69,8 @@ function onDocumentMouseMove( event ) {
    mouse.prevX = mouse.x;
    mouse.prevY = mouse.y;
 }
+
+// Päivittää piirtoalustan muille clienteille nähtäväksi
 function updateCanvas(prevX, prevY, x, y, col, size){
     context.strokeStyle = col;
     context.lineWidth = size;
@@ -69,6 +80,7 @@ function updateCanvas(prevX, prevY, x, y, col, size){
     context.stroke();
 }
 
+// Luodaan evenlistener napeille, jotta voidaan vaihtaa kynän väriä
 document.getElementById("red").addEventListener('click', function(){
     changeColor(this);
 });
@@ -94,6 +106,7 @@ document.getElementById("eraser").addEventListener('click', function(){
     changeColor(this);
 });
 
+// Vaihdetaan väri itselle ja päivitetään se myös muille clienteille
 function changeColor(x) {
 let c = x.id;
 switch (c) {
@@ -142,53 +155,45 @@ switch (c) {
 }
 }
 
+// Slider, jolla muutetaan kynän paksuutta, lähetetään
+// tieto myös muille clienteille
 let slider = document.getElementById("strokeRange");
-
 slider.oninput = function(){
     context.lineWidth = slider.value;
     mouse.strokeSize = slider.value;
 };
 
+// Tyhjennä piirtoalusta
 function clearCanvas() {
     let o = {empty: 1};
     conn.send(JSON.stringify(o));
     context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+// Lähetä piirtoalustalla oleva kuva dataURLina POSTia käyttäen PHP:lle
 function saveImage() {
-    //let imageName = document.getElementById("name").value;
-    //console.log(imageName);
-    let hr = new XMLHttpRequest();
-    let url = "../php/db.php";
+    let url = "../php/toDB.php";
     let data = "dataurl="+canvas.toDataURL("image/png");
-    //let data2 = {dataurl:(canvas.toDataURL("image/png"))};
-    //data = encodeURI(data);
-    hr.open("POST", url);
+    let hrsave = new XMLHttpRequest();
 
-    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    hr.onreadystatechange = function() {
-        if(hr.readyState === 4 && hr.status === 200) {
-            console.log("sent");
+    hrsave.open("POST", url);
 
+    hrsave.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    hrsave.onreadystatechange = function() {
+        if(hrsave.readyState === 4 && hrsave.status === 200) {
+            alert("Image saved");
         }
     };
-    hr.send(data);
-    clearCanvas();
+    hrsave.send(data);
 }
 
+// Lähettää PHP:lle pyynnön, vastaanottaa kuvan dataURLina
+// ja piirtää kuvan dataURLia käyttäen.
 function loadImage() {
-
     let hr = new XMLHttpRequest();
-    let url = "../php/fromDB.php";
+    let url1 = "../php/fromDB.php";
 
-    let ok = "ok=ok";
-
-    hr.addEventListener("error", function (event) {
-        event.preventDefault();
-        console.log("error");
-    });
-
-    hr.open("POST", url);
+    hr.open("POST", url1);
     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     hr.onreadystatechange = function () {
@@ -196,13 +201,13 @@ function loadImage() {
             clearCanvas();
             let dataur = hr.responseText.replace(/\s/g, "+");
             let img = new Image;
+
             img.onload = function () {
                 context.drawImage(img, 0, 0);
             };
             img.src = dataur;
         }
     };
-
-    hr.send(ok);
+    hr.send();
 }
 
